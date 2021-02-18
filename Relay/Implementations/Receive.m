@@ -16,13 +16,17 @@
         _connectionToService.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(UpperXPCProtocol)];
         [_connectionToService resume];
         
-        __block NSString * _result = NULL;
+        __block NSString *result = nil;
         
-        [[_connectionToService remoteObjectProxy] upperCaseString:string withReply:^(NSString *aString) {
-             _result = aString;
-            [_connectionToService invalidate];
+        NSConditionLock* barrierLock = [[NSConditionLock alloc] initWithCondition:NO];
+        
+        [[_connectionToService remoteObjectProxy] upperCaseString:string withReply:^(NSString *reply) {
+            result = reply;
+            [barrierLock lock];
+            [barrierLock unlockWithCondition:YES];
         }];
-        
-        return _result;
+        [barrierLock lockWhenCondition:YES];
+        [barrierLock unlock];
+        return result;
     }
 @end
