@@ -7,13 +7,26 @@
 
 import SwiftUI
 
+let defaultText = "Your text appears here!"
+
 struct ContentView: View {
     @ObservedObject var rootState = RootState()
+    @AppStorage("activityLog") var activityLog = defaultText;
     
     func onButtonPress() -> Void {
+        if rootState.inputString.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            return
+        }
         let newString = Receive.callXPC(rootState.inputString)
         rootState.inputString = newString ?? ""
-        return
+        
+        if activityLog.contains(defaultText) {
+            activityLog = ""
+        }
+        
+        activityLog.append(rootState.inputString)
+        activityLog.append("\n")
+        rootState.inputString = ""
     }
     
     var body: some View {
@@ -27,8 +40,9 @@ struct ContentView: View {
                         Text("Send")
                     }
                 }
+                ActivityLog(log: $activityLog)
             }
-        }.frame(maxWidth: .infinity, maxHeight: .infinity)
+        }.frame(minWidth: 500, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
     }
 }
 

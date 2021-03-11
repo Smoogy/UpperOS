@@ -6,9 +6,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Receive.h>
+#import "Receive.h"
 #import <xpc/xpc.h>
-#import <UpperXPCProtocol.h>
+#import "UpperXPCProtocol.h"
 
 @implementation Receive
     +(NSString *) callXPC:(NSString *)string {

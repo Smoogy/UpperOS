@@ -15,6 +15,7 @@
 		A357CF7425BE3AD900CDE037 /* Receive.m in Sources */ = {isa = PBXBuildFile; fileRef = A357CF7325BE3AD900CDE037 /* Receive.m */; };
 		A357CF8B25BE3EF900CDE037 /* Relay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A38EDE4725B56396008D38C9 /* Relay.framework */; };
 		A357CF8C25BE3EF900CDE037 /* Relay.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A38EDE4725B56396008D38C9 /* Relay.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A38CBEC725DE338F0008401A /* ActivityLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38CBEC625DE338F0008401A /* ActivityLog.swift */; };
 		A38EDE5025B56396008D38C9 /* Relay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A38EDE4725B56396008D38C9 /* Relay.framework */; };
 		A38EDE5525B56396008D38C9 /* RelayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A38EDE5425B56396008D38C9 /* RelayTests.m */; };
 		A38EDE6925B565F3008D38C9 /* RootState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38EDE6825B565F3008D38C9 /* RootState.swift */; };
@@ -119,6 +120,7 @@
 		A305964025BFDBDD00239674 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A357CF7325BE3AD900CDE037 /* Receive.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Receive.m; sourceTree = "<group>"; };
 		A357CF7D25BE3BC600CDE037 /* Upper-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Upper-Bridging-Header.h"; sourceTree = "<group>"; };
+		A38CBEC625DE338F0008401A /* ActivityLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLog.swift; sourceTree = "<group>"; };
 		A38EDE4725B56396008D38C9 /* Relay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Relay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A38EDE4925B56396008D38C9 /* Relay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Relay.h; sourceTree = "<group>"; };
 		A38EDE4A25B56396008D38C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				A3BCEE2825B3D3D0004411A2 /* Header.swift */,
+				A38CBEC625DE338F0008401A /* ActivityLog.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -467,7 +470,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1200;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					A305963725BFDBDD00239674 = {
 						CreatedOnToolsVersion = 12.0;
@@ -596,6 +599,7 @@
 				A3BCEE2925B3D3D0004411A2 /* Header.swift in Sources */,
 				A3BCEDF625B3D37A004411A2 /* AppDelegate.swift in Sources */,
 				A38EDE6925B565F3008D38C9 /* RootState.swift in Sources */,
+				A38CBEC725DE338F0008401A /* ActivityLog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,6 +669,7 @@
 		A305964525BFDBDD00239674 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = J4ZDAN6JHB;
@@ -679,6 +684,7 @@
 		A305964625BFDBDD00239674 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = J4ZDAN6JHB;
@@ -827,7 +833,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -882,7 +888,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -897,6 +903,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Upper/Upper.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -909,7 +916,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				PRODUCT_BUNDLE_IDENTIFIER = smoogy.Upper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Upper/Upper-Bridging-Header.h";
@@ -923,6 +930,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Upper/Upper.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -935,7 +943,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				PRODUCT_BUNDLE_IDENTIFIER = smoogy.Upper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Upper/Upper-Bridging-Header.h";
