@@ -17,16 +17,13 @@
         [_connectionToService resume];
         
         __block NSString *result = nil;
-        
-        NSConditionLock* barrierLock = [[NSConditionLock alloc] initWithCondition:NO];
-        
-        [[_connectionToService remoteObjectProxy] upperCaseString:string withReply:^(NSString *reply) {
+                
+        [[_connectionToService synchronousRemoteObjectProxyWithErrorHandler:^(NSError * _Nonnull error) {
+            NSLog(@"%@", error.localizedDescription);
+        }]
+         upperCaseString:string withReply:^(NSString *reply) {
             result = reply;
-            [barrierLock lock];
-            [barrierLock unlockWithCondition:YES];
         }];
-        [barrierLock lockWhenCondition:YES];
-        [barrierLock unlock];
         return result;
     }
 @end

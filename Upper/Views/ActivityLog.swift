@@ -17,9 +17,10 @@ struct ActivityLog: View {
                     .padding()
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                    .background(Color("AnyAppearanceBackgroundAndText"))
             }
         }.frame(minWidth: 0, minHeight: 0)
-        .background(Color.black)
+        .background(Color("AnyAppearanceBackgroundAndText"))
     }
 }
 
