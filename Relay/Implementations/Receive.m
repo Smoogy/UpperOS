@@ -10,20 +10,32 @@
 #import <xpc/xpc.h>
 #import "UpperXPCProtocol.h"
 
+@interface Receive ()
+// private
+-(void) connectToService;
+
+@end
+
 @implementation Receive
-    +(NSString *) callXPC:(NSString *)string {
-        NSXPCConnection* _connectionToService = [[NSXPCConnection alloc] initWithServiceName:@"smoogy.UpperXPC"];
+static NSXPCConnection* _connectionToService;
+
+-(NSString *) callXPC:(NSString *)string {
+    __block NSString *result = nil;
+    [self connectToService];
+    [[_connectionToService synchronousRemoteObjectProxyWithErrorHandler:^(NSError * _Nonnull error) {
+        NSLog(@"%@", error.localizedDescription);
+    }]
+     upperCaseString:string withReply:^(NSString *reply) {
+        result = reply;
+    }];
+    return result;
+}
+
+-(void)connectToService {
+    if (_connectionToService == nil) {
+        _connectionToService = [[NSXPCConnection alloc] initWithServiceName:@"smoogy.UpperXPC"];
         _connectionToService.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(UpperXPCProtocol)];
         [_connectionToService resume];
-        
-        __block NSString *result = nil;
-                
-        [[_connectionToService synchronousRemoteObjectProxyWithErrorHandler:^(NSError * _Nonnull error) {
-            NSLog(@"%@", error.localizedDescription);
-        }]
-         upperCaseString:string withReply:^(NSString *reply) {
-            result = reply;
-        }];
-        return result;
     }
+}
 @end

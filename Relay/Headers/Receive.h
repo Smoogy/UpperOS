@@ -11,9 +11,8 @@
 #import <Foundation/Foundation.h>
 
 @interface Receive : NSObject
-
-+ (NSString *)callXPC: (NSString *) string;
-
+// public
+-(NSString *)callXPC: (NSString *) string;
 @end
 
 #endif /* Receive_h */

@@ -12,12 +12,16 @@ let defaultText = "Your text appears here!"
 struct ContentView: View {
     @ObservedObject var rootState = RootState()
     @AppStorage("activityLog") var activityLog = defaultText;
+    @State var receive: Receive?
     
-    func onButtonPress() -> Void {
+    func onSendPress() -> Void {
         if rootState.inputString.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
             return
         }
-        let newString = Receive.callXPC(rootState.inputString)
+        if (receive == nil) {
+            return
+        }
+        let newString = receive!.callXPC(rootState.inputString)
         rootState.inputString = newString ?? ""
         
         if activityLog.contains(defaultText) {
@@ -29,6 +33,10 @@ struct ContentView: View {
         rootState.inputString = ""
     }
     
+    func onDeletePress() -> Void {
+        activityLog = ""
+    }
+    
     var body: some View {
         HStack {
             VStack {
@@ -36,9 +44,15 @@ struct ContentView: View {
                 HStack {
                     TextField("Enter text here", text: $rootState.inputString)
                         .frame(width: 100, height: 100, alignment: .center)
-                    Button(action: onButtonPress) {
+                    Button(action: onSendPress) {
                         Text("Send")
                     }
+                }
+                HStack {
+                    Spacer()
+                    Button(action: onDeletePress) {
+                        Image(systemName: "trash")
+                    }.padding(.trailing)
                 }
                 ActivityLog(log: $activityLog)
             }
